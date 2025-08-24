@@ -1,1 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Number Try Game</title>
+</head>
+<body>
+  <h1>Type a number from 1 to 100</h1>
+  <input id="numberInput" type="number" min="1" max="100" />
+  <button id="submitBtn">Submit</button>
+  <p id="message"></p>
+
+  <script>
+    let tries = 0;
+    let typedTen = false;
+
+    const input = document.getElementById('numberInput');
+    const button = document.getElementById('submitBtn');
+    const message = document.getElementById('message');
+
+    function resetInput() {
+      input.value = '';
+      input.focus();
+    }
+
+    button.addEventListener('click', () => {
+      let num = Number(input.value);
+
+      if (isNaN(num) || num < 1 || num > 100) {
+        message.textContent = "Please enter a valid number between 1 and 100.";
+        resetInput();
+        return;
+      }
+
+      tries++;
+
+      if (num === 10) {
+        typedTen = true;
+        message.textContent = "Hello SUPerman";
+        resetInput();
+        return;
+      }
+
+      if (tries % 4 === 0 && !typedTen) {
+        message.textContent = "I said try 10 broooo";
+      } else if (tries % 2 === 0 && !typedTen) {
+        if (!(tries <= 2 && typedTen)) {
+          message.textContent = "Try 10, because it's a good number";
+        }
+      } else {
+        message.textContent = "";
+      }
+
+      resetInput();
+    });
+
+    resetInput();
+  </script>
+</body>
+</html>
+
 
